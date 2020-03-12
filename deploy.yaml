@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: quarkus
+  name: quarkus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quarkus
+  template:
+    metadata:
+      labels:
+        app: quarkus
+    spec:
+      containers:
+      - image: quarkus
+        name: quarkus
+        imagePullPolicy: Never
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: "10Mi"
+            cpu: "10m"
+          requests:
+            cpu: "10m"
+            memory: "10Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quarkus
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: quarkus
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: quarkus
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: quarkus
+          servicePort: http
