@@ -10,7 +10,7 @@ WORKDIR /app
 RUN mvn test-compile dependency:resolve dependency:resolve-plugins
 
 ### Image for building the native binary
-FROM oracle/graalvm-ce:19.3.1 AS native-image
+FROM oracle/graalvm-ce:19.3.1-java11 AS native-image
 ENV MAVEN_OPTS=-Dmaven.repo.local=/mvnrepo
 COPY --from=mavencache /mvnrepo/ /mvnrepo/
 COPY . /app
