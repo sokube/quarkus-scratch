@@ -25,6 +25,11 @@ RUN gu install native-image && \
 ### Final image based on scratch containing only the binary
 FROM scratch
 COPY --chown=1000 --from=native-image /dist /work
+# it is possible to add timezone, certificat and new user/group
+# COPY --from=native-image /usr/share/zoneinfo /usr/share/zoneinfo
+# COPY --from=native-image /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+# COPY --from=native-image /etc/passwd /etc/passwd
+# COPY --from=native-image /etc/group /etc/group
 EXPOSE 8080
 USER 1000
 WORKDIR /work/
