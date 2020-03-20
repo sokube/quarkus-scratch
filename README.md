@@ -1,7 +1,8 @@
 # From scratch with Quarkus in k8s
 
-## Goal
+This is a demo application to show the benefice of having a very fast startup and low memory footprint using Quarkus with GraalVm (native compilation) inside a docker container based on the minimal image "FROM SCRATCH".
 
+See this article https://medium.com/@yannalbou/faster-lower-better-with-quarkus-in-k8s-83185af46f36
 
 ## Quarkus & Graalvm
 This lab is based on Quarkus: https://quarkus.io/
