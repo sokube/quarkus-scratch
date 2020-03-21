@@ -16,8 +16,8 @@ spec:
         app: quarkus
     spec:
       containers:
-      - image: quarkus
-        name: quarkus
+      - name: quarkus
+        image: quarkus-app
         imagePullPolicy: Never
         ports:
         - name: http
